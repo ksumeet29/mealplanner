@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tracker - Meal Planner</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <h1>🍽️ 7-Day Meal Planner</h1>
+  <nav class="main-nav" id="main-nav"></nav>
+</header>
+<main>
+  <h2 class="day-title">📊 Weekly Tracker</h2>
+  <p class="day-summary" id="week-summary"></p>
+  <button class="reset-btn" onclick="resetWeek()">Reset entire week</button>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Meals eaten</th>
+        <th>Calories</th>
+        <th>Protein</th>
+        <th>Fat</th>
+        <th>Carbs</th>
+        <th>Fibre</th>
+      </tr>
+    </thead>
+    <tbody id="tracker-body"></tbody>
+  </table>
+</main>
+<footer class="site-footer">Meal plan tracker &middot; data stored locally in your browser</footer>
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/nav.js"></script>
+<script>renderNav('tracker');</script>
+<script src="js/tracker.js"></script>
+</body>
+</html>

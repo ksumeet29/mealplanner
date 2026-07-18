@@ -1,2 +1,2 @@
-# mealplanner
-For meal planning and shopping list
+# Meal Planner
+For meal planning based on required macros and shopping list

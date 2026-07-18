@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thursday - Meal Planner</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <h1>🍽️ 7-Day Meal Planner</h1>
+  <nav class="main-nav" id="main-nav"></nav>
+</header>
+<main>
+  <h2 class="day-title" id="day-title">Thursday</h2>
+  <p class="day-summary" id="day-summary"></p>
+  <div id="meal-list"></div>
+</main>
+<footer class="site-footer">Meal plan tracker &middot; data stored locally in your browser</footer>
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/nav.js"></script>
+<script>
+  window.CURRENT_DAY = "Thursday";
+  renderNav('Thursday');
+</script>
+<script src="js/day.js"></script>
+</body>
+</html>

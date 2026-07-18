@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Planner</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <h1>🍽️ 7-Day Meal Planner</h1>
+  <nav class="main-nav" id="main-nav"></nav>
+</header>
+<main>
+  <p>No-rice, whey-assisted, lacto-ovo-vegetarian plan. Target: <strong>2107 ± 100 kcal</strong>, 166.6 g protein, 71.4 g fat, 199.5 g carbs/day.</p>
+  <p>Pick a day to see meals and check off what you've eaten, view the shopping list, or check your weekly macro tracker.</p>
+
+  <div class="day-nav-grid">
+    <a href="src/monday.html">Monday<span class="sub">2174 kcal</span></a>
+    <a href="src/tuesday.html">Tuesday<span class="sub">2158 kcal</span></a>
+    <a href="src/wednesday.html">Wednesday<span class="sub">1994 kcal · prep day</span></a>
+    <a href="src/thursday.html">Thursday<span class="sub">2220 kcal</span></a>
+    <a href="src/friday.html">Friday<span class="sub">2206 kcal</span></a>
+    <a href="src/saturday.html">Saturday<span class="sub">2182 kcal</span></a>
+    <a href="src/sunday.html">Sunday<span class="sub">2083 kcal · prep day</span></a>
+    <a href="src/shopping.html">🛒 Shopping List<span class="sub">All ingredients</span></a>
+    <a href="src/tracker.html">📊 Weekly Tracker<span class="sub">Macros & progress</span></a>
+  </div>
+</main>
+<footer class="site-footer">Meal plan tracker &middot; data stored locally in your browser</footer>
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/nav.js"></script>
+<script>renderNav('home');</script>
+</body>
+</html>
