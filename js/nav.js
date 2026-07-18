@@ -1,16 +1,20 @@
 // Renders the shared header/nav. Call renderNav('active-page-id') from each page.
 function renderNav(activeId) {
+  const inSrc = window.location.pathname.includes("/src/") || window.location.href.includes("/src/");
+  const pageBase = inSrc ? "" : "src/";
+  const homeHref = inSrc ? "../index.html" : "index.html";
+
   const links = [
-    { id: "home", href: "index.html", label: "Home" },
-    { id: "Monday", href: "src/monday.html", label: "Mon" },
-    { id: "Tuesday", href: "src/tuesday.html", label: "Tue" },
-    { id: "Wednesday", href: "src/wednesday.html", label: "Wed" },
-    { id: "Thursday", href: "src/thursday.html", label: "Thu" },
-    { id: "Friday", href: "src/friday.html", label: "Fri" },
-    { id: "Saturday", href: "src/saturday.html", label: "Sat" },
-    { id: "Sunday", href: "src/sunday.html", label: "Sun" },
-    { id: "shopping", href: "src/shopping.html", label: "🛒 Shopping List" },
-    { id: "tracker", href: "src/tracker.html", label: "📊 Weekly Tracker" }
+    { id: "home", href: homeHref, label: "Home" },
+    { id: "Monday", href: `${pageBase}monday.html`, label: "Mon" },
+    { id: "Tuesday", href: `${pageBase}tuesday.html`, label: "Tue" },
+    { id: "Wednesday", href: `${pageBase}wednesday.html`, label: "Wed" },
+    { id: "Thursday", href: `${pageBase}thursday.html`, label: "Thu" },
+    { id: "Friday", href: `${pageBase}friday.html`, label: "Fri" },
+    { id: "Saturday", href: `${pageBase}saturday.html`, label: "Sat" },
+    { id: "Sunday", href: `${pageBase}sunday.html`, label: "Sun" },
+    { id: "shopping", href: `${pageBase}shopping.html`, label: "🛒 Shopping List" },
+    { id: "tracker", href: `${pageBase}tracker.html`, label: "📊 Weekly Tracker" }
   ];
   const nav = document.getElementById("main-nav");
   if (!nav) return;
