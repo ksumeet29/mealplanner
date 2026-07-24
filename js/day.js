@@ -2,13 +2,13 @@
 
 function renderDayPage() {
   const day = window.CURRENT_DAY;
-  const data = MEAL_PLAN[day];
+  const data = getActiveMealPlan()[day];
   if (!data) return;
 
   document.getElementById("day-title").textContent = day + (data.note ? ` (${data.note})` : "");
   const t = data.target;
   document.getElementById("day-summary").textContent =
-    `Target: ${t.kcal} kcal · ${t.protein} P · ${t.fat} F · ${t.carbs} C · ${t.fib} Fib`;
+    `Target: ${t.kcal} kCal · ${t.protein} g Protein · ${t.fat} g Fats · ${t.carbs} g Carbs · ${t.fib} g Fibre`;
 
   const container = document.getElementById("meal-list");
   container.innerHTML = "";
@@ -34,7 +34,7 @@ function renderDayPage() {
       <div class="meal-name">${meal.name}</div>
       <div class="meal-recipe">${meal.recipe}</div>
       <div class="meal-macros">
-        <span class="macro-pill">${meal.kcal} kcal</span>
+        <span class="macro-pill">${meal.kcal} kCal</span>
         <span class="macro-pill">${meal.protein} g protein</span>
         <span class="macro-pill">${meal.fat} g fat</span>
         <span class="macro-pill">${meal.carbs} g carbs</span>

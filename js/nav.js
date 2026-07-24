@@ -6,6 +6,8 @@ function renderNav(activeId) {
 
   const links = [
     { id: "home", href: homeHref, label: "Home" },
+    { id: "calculator", href: inSrc ? "../calculator.html" : "calculator.html", label: "⚙️ Calculator" },
+    { id: "planner", href: inSrc ? "../planner.html" : "planner.html", label: "🧺 Planner" },
     { id: "Monday", href: `${pageBase}monday.html`, label: "Mon" },
     { id: "Tuesday", href: `${pageBase}tuesday.html`, label: "Tue" },
     { id: "Wednesday", href: `${pageBase}wednesday.html`, label: "Wed" },

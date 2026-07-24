@@ -205,8 +205,30 @@ table.data-table tr:last-child td { border-bottom: none; }
   margin-top: 0.2rem;
 }
 
+.frequency-group {
+  margin-bottom: 2.2rem;
+  padding-bottom: 0.5rem;
+}
+
+.frequency-group + .frequency-group {
+  border-top: 3px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.frequency-title {
+  color: var(--primary-dark);
+  margin-bottom: 0.2rem;
+}
+
+.frequency-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
 section.category {
   margin-bottom: 1.3rem;
+  margin-left: 0.5rem;
 }
 
 section.category h3 {
@@ -252,4 +274,213 @@ footer.site-footer {
   color: var(--muted);
   font-size: 0.8rem;
   padding: 1.5rem;
+}
+
+/* --- Calculator & Planner pages --- */
+
+.intro-text {
+  margin-bottom: 1.2rem;
+}
+
+.form-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 560px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field-group input,
+.field-group select {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.unit-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.radio-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.submit-btn {
+  grid-column: 1 / -1;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.4rem;
+}
+
+.submit-btn:hover { background: var(--primary-dark); }
+
+.submit-btn.secondary {
+  background: var(--accent);
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.result-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  box-shadow: var(--shadow);
+}
+
+.result-item .label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+.result-item .value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.result-item.highlight {
+  border-color: var(--primary);
+  background: #eef3ea;
+}
+
+.result-item.selectable {
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.result-item.selectable:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.result-item.selectable.selected {
+  border-color: var(--primary);
+  background: #eef3ea;
+  box-shadow: 0 0 0 2px var(--primary) inset;
+}
+
+.result-item.selectable .label::after {
+  content: "";
+}
+
+.result-item.selectable.selected .label::before {
+  content: "✓ ";
+  color: var(--primary-dark);
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.ingredient-category h3 {
+  color: var(--primary-dark);
+  margin: 1.2rem 0 0.5rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.2rem;
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  font-size: 0.92rem;
+}
+
+.ingredient-item input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.warning-box {
+  background: #fff4e5;
+  border: 1px solid var(--accent);
+  color: #8a4b00;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.88rem;
+}
+
+.warning-box ul {
+  margin: 0.3rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.info-box {
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+
+.step-banner {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.step-banner span {
+  background: #eef3ea;
+  color: var(--primary-dark);
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.step-banner span.done {
+  background: var(--primary);
+  color: #fff;
 }

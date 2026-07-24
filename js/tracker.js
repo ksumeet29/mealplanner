@@ -1,7 +1,7 @@
 // Renders the weekly tracker: which meals were eaten per day, and macro totals consumed vs planned.
 
 function computeDayConsumed(day) {
-  const data = MEAL_PLAN[day];
+  const data = getActiveMealPlan()[day];
   const consumed = { kcal: 0, protein: 0, fat: 0, carbs: 0, fib: 0 };
   const eatenMeals = [];
   data.meals.forEach((meal, idx) => {
@@ -30,7 +30,7 @@ function renderTracker() {
   const weekTargets = { kcal: 0, protein: 0, fat: 0, carbs: 0, fib: 0 };
 
   DAY_ORDER.forEach((day) => {
-    const data = MEAL_PLAN[day];
+    const data = getActiveMealPlan()[day];
     const { consumed, eatenMeals } = computeDayConsumed(day);
     const target = data.target;
 

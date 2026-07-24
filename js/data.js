@@ -85,50 +85,65 @@ const DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satu
 
 const OVERALL_TARGET = { kcal: 2107, protein: 166.6, fat: 71.4, carbs: 199.5, fib: null };
 
-// Shopping list — aggregated approximate weekly quantities derived from the
-// meal plan + Sunday/Wednesday prep sessions. Adjust to taste/brand sizes.
+// Shopping list grouped by purchase frequency (per docx_output.md's 7-day plan +
+// Sunday/Wednesday prep sessions), then by category within each frequency.
+// Weekly: highly perishable items consumed fresh within the 7-day cycle.
+// Bi-Weekly: semi-perishables that keep 2-3 weeks and don't need a weekly re-buy.
+// Monthly: shelf-stable pantry staples typically bought in bulk.
 const SHOPPING_LIST = {
-  "Proteins": [
-    { item: "Eggs", qty: "36 (20 fresh for breakfasts + 16 hard-boiled for snacks)" },
-    { item: "Whey protein powder", qty: "~14 scoops" },
-    { item: "Cottage cheese (paneer)", qty: "~2.8 kg" },
-    { item: "Cheese (grated/sliced)", qty: "~150 g" },
-    { item: "Milk", qty: "~2 L (shakes, porridge, smoothies)" },
-    { item: "Turkish yoghurt", qty: "100 g" }
-  ],
-  "Legumes & Grains": [
-    { item: "Dry chickpeas (chana/rajma-style raw)", qty: "~400 g (soaking + refill)" },
-    { item: "Dry rajma (kidney beans)", qty: "~250 g" },
-    { item: "Masoor/moong dal (pulses)", qty: "~200 g" },
-    { item: "Bulgur wheat", qty: "~450 g" },
-    { item: "Rolled oats", qty: "~90 g" },
-    { item: "Whole wheat flour (atta)", qty: "~900 g" },
-    { item: "Pasta (dry)", qty: "~120 g" },
-    { item: "Sweet potato", qty: "150 g" }
-  ],
-  "Vegetables": [
-    { item: "Onions", qty: "~8 medium" },
-    { item: "Tomatoes", qty: "~10 medium" },
-    { item: "Capsicum", qty: "~5" },
-    { item: "Carrots", qty: "~5" },
-    { item: "Beetroot", qty: "~4" },
-    { item: "Cauliflower", qty: "~2" },
-    { item: "Frozen peas & corn", qty: "~300 g" },
-    { item: "Cucumber", qty: "1-2 (snack sticks)" },
-    { item: "Garlic", qty: "1 bulb" },
-    { item: "Ginger", qty: "2 inch piece" }
-  ],
-  "Fruits": [
-    { item: "Bananas", qty: "~4" },
-    { item: "Apples", qty: "~5" },
-    { item: "Mango (fresh/frozen pulp)", qty: "~3" }
-  ],
-  "Pantry & Spices": [
-    { item: "Cooking oil", qty: "~15 tsp (~75 ml)" },
-    { item: "Honey", qty: "3 tsp" },
-    { item: "Cinnamon powder", qty: "small jar" },
-    { item: "Turmeric, red chili, coriander powder, garam masala", qty: "as needed" },
-    { item: "Salt", qty: "as needed" },
-    { item: "Lemon", qty: "2-3" }
-  ]
+  "Weekly": {
+    "Proteins": [
+      { item: "Eggs", qty: "36 (20 fresh for breakfasts + 16 hard-boiled for snacks)" },
+      { item: "Cottage cheese (paneer)", qty: "~2.8 kg" },
+      { item: "Milk", qty: "~2 L (shakes, porridge, smoothies)" },
+      { item: "Turkish yoghurt", qty: "100 g" }
+    ],
+    "Vegetables": [
+      { item: "Onions", qty: "~8 medium" },
+      { item: "Tomatoes", qty: "~10 medium" },
+      { item: "Capsicum", qty: "~5" },
+      { item: "Carrots", qty: "~5" },
+      { item: "Beetroot", qty: "~4" },
+      { item: "Cauliflower", qty: "~2" },
+      { item: "Cucumber", qty: "1-2 (snack sticks)" }
+    ],
+    "Fruits": [
+      { item: "Bananas", qty: "~4" },
+      { item: "Apples", qty: "~5" },
+      { item: "Mango (fresh/frozen pulp)", qty: "~3" },
+      { item: "Lemon", qty: "2-3" }
+    ]
+  },
+  "Bi-Weekly": {
+    "Proteins": [
+      { item: "Cheese (grated/sliced)", qty: "~150 g" }
+    ],
+    "Vegetables & Aromatics": [
+      { item: "Frozen peas & corn", qty: "~300 g" },
+      { item: "Garlic", qty: "1 bulb" },
+      { item: "Ginger", qty: "2 inch piece" },
+      { item: "Sweet potato", qty: "150 g" }
+    ]
+  },
+  "Monthly": {
+    "Proteins": [
+      { item: "Whey protein powder", qty: "~14 scoops" }
+    ],
+    "Legumes & Grains": [
+      { item: "Dry chickpeas (chana/rajma-style raw)", qty: "~400 g (soaking + refill)" },
+      { item: "Dry rajma (kidney beans)", qty: "~250 g" },
+      { item: "Masoor/moong dal (pulses)", qty: "~200 g" },
+      { item: "Bulgur wheat", qty: "~450 g" },
+      { item: "Rolled oats", qty: "~90 g" },
+      { item: "Whole wheat flour (atta)", qty: "~900 g" },
+      { item: "Pasta (dry)", qty: "~120 g" }
+    ],
+    "Pantry & Spices": [
+      { item: "Cooking oil", qty: "~15 tsp (~75 ml)" },
+      { item: "Honey", qty: "3 tsp" },
+      { item: "Cinnamon powder", qty: "small jar" },
+      { item: "Turmeric, red chili, coriander powder, garam masala", qty: "as needed" },
+      { item: "Salt", qty: "as needed" }
+    ]
+  }
 };

@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: fitness-meal-planner
+    runtime: static
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache

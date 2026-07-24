@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planner - Meal Planner</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <h1>🍽️ 7-Day Meal Planner</h1>
+  <nav class="main-nav" id="main-nav"></nav>
+</header>
+<main>
+  <div class="step-banner">
+    <span class="done">Step 1 · Calculate macros</span>
+    <span class="done">Step 2 · Pick ingredients</span>
+    <span>Step 3 · Get your plan</span>
+  </div>
+
+  <h2 class="day-title">🧺 Planner</h2>
+  <p class="day-summary">Select the ingredients you eat/have on hand, then generate a 7-day meal plan built around your macro targets.</p>
+
+  <div id="no-macros-warning" class="warning-box" style="display:none;">
+    You haven't calculated your macros yet. <a href="calculator.html">Go to the Calculator</a> first.
+  </div>
+
+  <div id="macro-summary" class="result-grid"></div>
+
+  <div id="ingredient-picker" class="form-card">
+    <div id="ingredient-groups"></div>
+    <button id="generate-btn" class="submit-btn" type="button">Generate 7-Day Plan</button>
+  </div>
+
+  <div id="warnings" class="warning-box" style="display:none;"></div>
+
+  <div id="plan-preview" style="display:none;">
+    <h2>Your Generated Plan</h2>
+    <div class="day-nav-grid" id="plan-day-grid"></div>
+    <p class="day-summary">
+      <a href="src/tracker.html">📊 Weekly Tracker</a> &middot;
+      <a href="src/shopping.html">🛒 Shopping List</a>
+    </p>
+    <button id="regenerate-btn" class="submit-btn secondary" type="button">Regenerate (shuffle ingredient combos)</button>
+  </div>
+</main>
+<footer class="site-footer">Meal plan tracker &middot; data stored locally in your browser</footer>
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/state.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/foodDatabase.js"></script>
+<script src="js/mealEngine.js"></script>
+<script>
+  renderNav('planner');
+
+  const macros = loadMacros();
+  if (!macros) {
+    document.getElementById('no-macros-warning').style.display = 'block';
+    document.getElementById('ingredient-picker').style.display = 'none';
+  } else {
+    document.getElementById('macro-summary').innerHTML = `
+      <div class="result-item highlight"><span class="label">Target Calories</span><span class="value">${macros.calories} kcal</span></div>
+      <div class="result-item"><span class="label">Protein</span><span class="value">${macros.protein} g</span></div>
+      <div class="result-item"><span class="label">Fat</span><span class="value">${macros.fat} g</span></div>
+      <div class="result-item"><span class="label">Carbs</span><span class="value">${macros.carbs} g</span></div>
+    `;
+  }
+
+  const selected = new Set(loadSelectedIngredients());
+
+  function renderIngredientGroups() {
+    const container = document.getElementById('ingredient-groups');
+    container.innerHTML = '';
+    ['protein', 'carb', 'fat', 'veg'].forEach((cat) => {
+      const items = FOOD_DATABASE.filter((f) => f.category === cat);
+      const section = document.createElement('div');
+      section.className = 'ingredient-category';
+      section.innerHTML = `<h3>${FOOD_CATEGORY_LABELS[cat]}</h3>`;
+      const grid = document.createElement('div');
+      grid.className = 'ingredient-grid';
+      items.forEach((item) => {
+        const label = document.createElement('label');
+        label.className = 'ingredient-item';
+        label.innerHTML = `<input type="checkbox" value="${item.id}" ${selected.has(item.id) ? 'checked' : ''}> ${item.name}`;
+        label.querySelector('input').addEventListener('change', (e) => {
+          if (e.target.checked) selected.add(item.id);
+          else selected.delete(item.id);
+          saveSelectedIngredients(Array.from(selected));
+        });
+        grid.appendChild(label);
+      });
+      section.appendChild(grid);
+      container.appendChild(section);
+    });
+  }
+
+  function renderPlanPreview(plan) {
+    const grid = document.getElementById('plan-day-grid');
+    grid.innerHTML = '';
+    DAY_ORDER.forEach((day) => {
+      const a = document.createElement('a');
+      a.href = `src/${day.toLowerCase()}.html`;
+      a.innerHTML = `${day}<span class="sub">${plan[day].target.kcal} kcal</span>`;
+      grid.appendChild(a);
+    });
+    document.getElementById('plan-preview').style.display = 'block';
+  }
+
+  function generatePlan() {
+    if (!macros) return;
+    if (!selected.size) {
+      alert('Select at least a few ingredients first.');
+      return;
+    }
+    const { plan, shoppingTotals, warnings } = generateWeekPlan(macros, Array.from(selected));
+    saveGeneratedPlan(plan);
+    saveGeneratedShopping(buildShoppingList(shoppingTotals));
+
+    const warningBox = document.getElementById('warnings');
+    if (warnings.length) {
+      warningBox.style.display = 'block';
+      warningBox.innerHTML = `<strong>Heads up:</strong><ul>${warnings.map((w) => `<li>${w}</li>`).join('')}</ul>`;
+    } else {
+      warningBox.style.display = 'none';
+    }
+
+    renderPlanPreview(plan);
+  }
+
+  document.getElementById('generate-btn').addEventListener('click', generatePlan);
+  document.getElementById('regenerate-btn')?.addEventListener('click', generatePlan);
+
+  renderIngredientGroups();
+  if (hasGeneratedPlan()) {
+    renderPlanPreview(getActiveMealPlan());
+  }
+</script>
+</body>
+</html>
